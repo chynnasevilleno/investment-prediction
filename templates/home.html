@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Investment Prediction App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+</head>
+
+<body style="overflow-y:hidden;">
+    <div class="container-fluid">
+        <form action="/getprediction" method="POST" name="form">
+            <div class="row">
+                <div class="col-md-8 p-4 bg-light">
+                    <div class="pl-5">
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted" for="tv">Trading Volume</label>
+                            <input name="trading_volume" class="form-control form-control-sm col-md-8" id="tv" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted">Change in Percent: </label>
+                            <input name="change_in_percent" class="form-control form-control-sm col-md-8" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted">Opening Price:</label>
+                            <input type="text" class="form-control form-control-sm col-md-8" id="open" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted">Closing Price: </label>
+                            <input type="text" class="form-control form-control-sm col-md-8" id="close" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted">High Price:</label>
+                            <input type="text" class="form-control form-control-sm col-md-8" id="high" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-sm text-muted">Low Price: </label>
+                            <input type="text" class="form-control form-control-sm col-md-8" id="low" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 pl-4">
+                    <h1 class="display-4">Investment Prediction</h1>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm text-muted">Opening and Closing Price
+                            Difference:
+                        </label>
+                        <input type="text" readonly class="form-control-plaintext h3" name="Open-Close" id="Open-Close"
+                            value="0" />
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm text-muted">High and Low Price Difference:
+                        </label>
+                        <input name="High-Low" readonly class="form-control-plaintext h3" id="High-Low" type="text"
+                            value="0" />
+                    </div>
+                    <div class="form-group ml-2 row">
+                        <button type="button" onclick="calculate()" class="btn btn-secondary mr-2">Calculate</button>
+                        <input type="submit" class="btn btn-primary" value="Predict" />
+                    </div>
+                    <div class="my-5 col-md-8">
+                        <p class="text-black-50"><small>Made with ❤️ by Balao, Gaynor, Samodal, Sevilleno</small></p>
+                        <p class="text-monospace"><small>Made using Jupyter, Flask, and Heroku</small></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function calculate() {
+            // calculates the difference between high and low prices & 
+            // and opening and closing prices
+            var opening = document.getElementById('open').value;
+            var closing = document.getElementById('close').value;
+            var oc_diff = parseFloat(opening) - parseFloat(closing);
+            document.getElementById('Open-Close').value = oc_diff.toFixed(4);;
+
+            var high = document.getElementById('high').value;
+            var low = document.getElementById('low').value;
+            var hl_diff = parseFloat(high) - parseFloat(low);
+            document.getElementById('High-Low').value = hl_diff.toFixed(4);;
+        }
+    </script>
+</body>
+
+</html>
